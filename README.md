@@ -112,7 +112,6 @@ To compile and execute all 37 tests across the multi-module project, run:
 Bash
 mvn clean test
 Test Results Summary
-Plaintext
 [INFO] Results:
 [INFO] 
 [INFO] Tests run: 37, Failures: 0, Errors: 0, Skipped: 0
