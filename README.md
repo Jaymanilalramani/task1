@@ -34,9 +34,9 @@ CONFIRMED: Lines are immutable. Can transition to PAID (with valid payment) or C
 PAID: Terminal state. Cannot return to draft, cannot add lines, cannot be paid again, cannot be cancelled.
 
 CANCELLED: Terminal state. Cannot be paid, cannot be confirmed, cannot return to draft.
+## 3. Multi-Module Project Structure
 
-3. Multi-Module Project Structure
-Plaintext
+```text
 order-domain-system/
 ├── pom.xml                                     # Root aggregator POM
 ├── order-domain/                               # PURE JAVA 17 DOMAIN MODULE
@@ -105,6 +105,7 @@ order-domain-system/
     │   └── architecture/
     │       └── DomainBoundaryTest.java         # Architecture boundary verification (1 test)
     └── pom.xml
+```
 4. Running the Tests
 To compile and execute all 37 tests across the multi-module project, run:
 
