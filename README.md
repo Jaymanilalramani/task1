@@ -1,18 +1,27 @@
-Order Domain System - Hexagonal Architecture & Approval Lifecycle
+# Order Domain System - Hexagonal Architecture & Approval Lifecycle
+
 A framework-independent domain model implementing the Order approval workflow in Java 17, designed according to Domain-Driven Design (DDD) and Hexagonal (Ports and Adapters) Architecture principles.
 
-1. Domain Requirements & Invariants
-Based on order-domain-requirements.json:
+---
 
-Rule	Description	Implementation & Invariant Enforcement
-Rule 1	An order must contain at least one line before confirmation.	Order.confirm() validates lines.isEmpty(), throwing OrderValidationException.
-Rule 2	Quantity must be a positive whole number.	Quantity value object compact constructor requires value > 0, throwing OrderValidationException.
-Rule 3	A cancelled order cannot be paid.	Order.recordPayment() checks status == CANCELLED, throwing InvalidOrderStateException.
-Rule 4	A paid order cannot return to draft.	Order.revertToDraft() and Order.addLine() check status == PAID, throwing InvalidOrderStateException.
-Rule 5	Order total is derived from immutable line prices and quantities.	Recalculated dynamically as ∑(line.unitPrice×line.quantity) upon adding/removing lines.
-Constraint	Keep domain module independent of Spring, JPA, HTTP, DB.	Pure Java 17 standard library in order-domain (validated by DomainBoundaryTest).
-2. State Machine
-Plaintext
+## 1. Domain Requirements & Invariants
+
+Based on `order-domain-requirements.json`:
+
+| Rule | Description | Implementation & Invariant Enforcement |
+| :--- | :--- | :--- |
+| **Rule 1** | An order must contain at least one line before confirmation. | `Order.confirm()` validates `lines.isEmpty()`, throwing `OrderValidationException`. |
+| **Rule 2** | Quantity must be a positive whole number. | `Quantity` value object compact constructor requires `value > 0`, throwing `OrderValidationException`. |
+| **Rule 3** | A cancelled order cannot be paid. | `Order.recordPayment()` checks `status == CANCELLED`, throwing `InvalidOrderStateException`. |
+| **Rule 4** | A paid order cannot return to draft. | `Order.revertToDraft()` and `Order.addLine()` check `status == PAID`, throwing `InvalidOrderStateException`. |
+| **Rule 5** | Order total is derived from immutable line prices and quantities. | Recalculated dynamically as $\sum(\text{line.unitPrice} \times \text{line.quantity})$ upon adding/removing lines. |
+| **Constraint** | Keep domain module independent of Spring, JPA, HTTP, DB. | Pure Java 17 standard library in `order-domain` (validated by `DomainBoundaryTest`). |
+
+---
+
+## 2. State Machine
+
+```text
                     +------------------------------------+
                     |                                    |
                     v                                    |
@@ -25,15 +34,17 @@ Plaintext
                     | (recordPayment)
                     v
                  [ PAID ] (terminal state)
-Transition Rules:
+```
 
-DRAFT: Can add/remove lines. Can transition to CONFIRMED (if lines ≥1) or CANCELLED. Direct payment is rejected.
+**Transition Rules:**
 
-CONFIRMED: Lines are immutable. Can transition to PAID (with valid payment) or CANCELLED, or revert to DRAFT.
+* **`DRAFT`**: Can add/remove lines. Can transition to `CONFIRMED` (if lines $\ge 1$) or `CANCELLED`. Direct payment is rejected.
+* **`CONFIRMED`**: Lines are immutable. Can transition to `PAID` (with valid payment) or `CANCELLED`, or revert to `DRAFT`.
+* **`PAID`** *(Terminal State)*: Cannot return to draft, cannot add lines, cannot be paid again, cannot be cancelled.
+* **`CANCELLED`** *(Terminal State)*: Cannot be paid, cannot be confirmed, cannot return to draft.
 
-PAID: Terminal state. Cannot return to draft, cannot add lines, cannot be paid again, cannot be cancelled.
+---
 
-CANCELLED: Terminal state. Cannot be paid, cannot be confirmed, cannot return to draft.
 ## 3. Multi-Module Project Structure
 
 ```text
@@ -106,6 +117,9 @@ order-domain-system/
     │       └── DomainBoundaryTest.java         # Architecture boundary verification (1 test)
     └── pom.xml
 ```
+
+---
+
 ## 4. Running the Tests
 
 To compile and execute all 37 tests across the multi-module project, run the following command:
