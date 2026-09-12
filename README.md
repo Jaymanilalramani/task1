@@ -4,7 +4,7 @@ A framework-independent domain model implementing the Order approval workflow in
 1. Domain Requirements & Invariants
 Based on order-domain-requirements.json:
 
-Rule	Description	Implementation & Invariant Enforcement
+Rule	Description	Implementation & Invariant Enforcement.
 Rule 1	An order must contain at least one line before confirmation.	Order.confirm() validates lines.isEmpty(), throwing OrderValidationException.
 Rule 2	Quantity must be a positive whole number.	Quantity value object compact constructor requires value > 0, throwing OrderValidationException.
 Rule 3	A cancelled order cannot be paid.	Order.recordPayment() checks status == CANCELLED, throwing InvalidOrderStateException.
