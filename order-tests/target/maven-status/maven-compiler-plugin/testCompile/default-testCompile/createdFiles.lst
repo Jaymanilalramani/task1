@@ -1,0 +1,10 @@
+com\rabtech\order\architecture\DomainBoundaryTest.class
+com\rabtech\order\application\OrderApplicationServiceTest.class
+com\rabtech\order\domain\StateTransitionsTest$IllegalTransitions.class
+com\rabtech\order\domain\ValueObjectsTest.class
+com\rabtech\order\domain\ValueObjectsTest$MoneyTests.class
+com\rabtech\order\domain\OrderAggregateTest.class
+com\rabtech\order\domain\StateTransitionsTest$LegalTransitions.class
+com\rabtech\order\domain\ValueObjectsTest$QuantityTests.class
+com\rabtech\order\domain\StateTransitionsTest.class
+com\rabtech\order\domain\ValueObjectsTest$OrderIdTests.class

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.rabtech.order.domain.ValueObjectsTest$QuantityTests
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.050 s -- in com.rabtech.order.domain.ValueObjectsTest$QuantityTests

@@ -1,0 +1,7 @@
+com\rabtech\order\application\commands\CancelOrderCommand.class
+com\rabtech\order\application\commands\ConfirmOrderCommand.class
+com\rabtech\order\application\commands\AddOrderLineCommand.class
+com\rabtech\order\application\service\OrderApplicationService.class
+com\rabtech\order\application\commands\CreateOrderCommand.class
+com\rabtech\order\application\commands\RemoveOrderLineCommand.class
+com\rabtech\order\application\commands\RecordPaymentCommand.class
