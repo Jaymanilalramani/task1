@@ -106,12 +106,17 @@ order-domain-system/
     │       └── DomainBoundaryTest.java         # Architecture boundary verification (1 test)
     └── pom.xml
 ```
-4. Running the Tests
-To compile and execute all 37 tests across the multi-module project, run:
+## 4. Running the Tests
 
-Bash
+To compile and execute all 37 tests across the multi-module project, run the following command:
+
+```bash
 mvn clean test
-Test Results Summary
+```
+
+### Test Results Summary
+
+```text
 [INFO] Results:
 [INFO] 
 [INFO] Tests run: 37, Failures: 0, Errors: 0, Skipped: 0
@@ -126,3 +131,4 @@ Test Results Summary
 [INFO] Order Tests ........................................ SUCCESS
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
+```
